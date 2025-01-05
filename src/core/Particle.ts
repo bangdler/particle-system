@@ -2,9 +2,8 @@ import { Color, Vector3 } from 'three';
 import { ParticleParameter, Sizes } from './types/particleSystem';
 
 export default class Particle {
-  startTime: number = 0;
+  startTime: number;
   life: number;
-  offsetTime: number;
   position: Vector3;
   velocity: Vector3;
   acceleration: Vector3;
@@ -19,7 +18,7 @@ export default class Particle {
 
   constructor({
     life,
-    offsetTime,
+    startTime,
     startPosition,
     startVelocity,
     startAcceleration,
@@ -30,10 +29,10 @@ export default class Particle {
     sizes,
     centerVelocity,
     startOpacity,
-    endOpacity
+    endOpacity,
   }: ParticleParameter) {
     this.life = life;
-    this.offsetTime = offsetTime;
+    this.startTime = startTime;
     this.position = startPosition;
     this.velocity = startVelocity;
     this.acceleration = startAcceleration;

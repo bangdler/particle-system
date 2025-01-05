@@ -6,7 +6,7 @@ import {
   ShaderMaterial,
   Texture,
   UniformsLib,
-  UniformsUtils
+  UniformsUtils,
 } from 'three';
 import Particle from './Particle.js';
 import { particleFragmentShader, particleVertexShader } from './shaders.js';
@@ -32,7 +32,6 @@ export default class ParticleObject {
     const particleCount = particleArray.length;
     const startTimes = new Float32Array(particleCount);
     const lives = new Float32Array(particleCount);
-    const offsetTimes = new Float32Array(particleCount);
     const positions = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
     const accelerations = new Float32Array(particleCount * 3);
@@ -48,7 +47,6 @@ export default class ParticleObject {
     particleArray.forEach((particle, i) => {
       startTimes[i] = particle.startTime;
       lives[i] = particle.life;
-      offsetTimes[i] = particle.offsetTime;
       particle.position.toArray(positions, i * 3);
       particle.velocity.toArray(velocities, i * 3);
       particle.acceleration.toArray(accelerations, i * 3);
@@ -66,39 +64,35 @@ export default class ParticleObject {
 
     this.geometry.setAttribute('startTime', new BufferAttribute(startTimes, 1));
     this.geometry.setAttribute('life', new BufferAttribute(lives, 1));
-    this.geometry.setAttribute(
-      'offsetTime',
-      new BufferAttribute(offsetTimes, 1)
-    );
 
     this.geometry.setAttribute('position', new BufferAttribute(positions, 3));
     this.geometry.setAttribute('velocity', new BufferAttribute(velocities, 3));
     this.geometry.setAttribute(
       'acceleration',
-      new BufferAttribute(accelerations, 3)
+      new BufferAttribute(accelerations, 3),
     );
     this.geometry.setAttribute('angle', new BufferAttribute(angles, 1));
     this.geometry.setAttribute(
       'angleVelocity',
-      new BufferAttribute(angleVelocities, 1)
+      new BufferAttribute(angleVelocities, 1),
     );
     this.geometry.setAttribute(
       'startColor',
-      new BufferAttribute(startColors, 3)
+      new BufferAttribute(startColors, 3),
     );
     this.geometry.setAttribute('endColor', new BufferAttribute(endColors, 3));
     this.geometry.setAttribute('sizes', new BufferAttribute(sizesArray, 3));
     this.geometry.setAttribute(
       'centerVelocity',
-      new BufferAttribute(centerVelocities, 3)
+      new BufferAttribute(centerVelocities, 3),
     );
     this.geometry.setAttribute(
       'startOpacity',
-      new BufferAttribute(startOpacities, 1)
+      new BufferAttribute(startOpacities, 1),
     );
     this.geometry.setAttribute(
       'endOpacity',
-      new BufferAttribute(endOpacities, 1)
+      new BufferAttribute(endOpacities, 1),
     );
   }
 
@@ -111,8 +105,8 @@ export default class ParticleObject {
         {
           time: { value: 0.0 },
           map: { value: this.texture },
-          uvTransform: { value: this.texture.matrix }
-        }
+          uvTransform: { value: this.texture.matrix },
+        },
       ]),
       vertexShader: particleVertexShader,
       fragmentShader: particleFragmentShader,
@@ -121,7 +115,7 @@ export default class ParticleObject {
       depthTest: true,
       depthWrite: this.depthComparison,
       alphaToCoverage: this.depthComparison,
-      fog: true
+      fog: true,
     });
     this.material.visible = false;
   }

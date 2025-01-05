@@ -1,12 +1,13 @@
+import ParticleObject from '../ParticleObject';
+import { Initializer } from './../Initializer';
 import { Blending, Color, Object3D, Texture, Vector3 } from 'three';
-import { EmitterObject } from '../EmitterObject';
 
 // Core Type
 export type Sizes = [number, number, number];
 
 export interface ParticleParameter {
   life: number;
-  offsetTime: number;
+  startTime: number;
   startPosition: Vector3;
   startVelocity: Vector3;
   startAcceleration: Vector3;
@@ -21,11 +22,25 @@ export interface ParticleParameter {
 }
 
 export interface EmitterParameter {
-  particlesPerSecond: number;
+  age: number;
+  particleCount: number;
   particleLife: number;
   emitterLife: number;
   flowMode: boolean;
-  emitterObject: EmitterObject;
+  trail: boolean;
+  initializer: Initializer;
+  particleObject: ParticleObject;
+}
+
+export interface ParticleObjectParameter {
+  texture: Texture;
+  blending: Blending;
+  depthComparison: boolean;
+}
+
+export interface InitializerParameter {
+  initialBox: Object3D;
+
   velocityBase: Vector3;
   velocitySpread: Vector3;
   accelerationBase: Vector3;
@@ -42,20 +57,4 @@ export interface EmitterParameter {
   endColors: Color[];
   startOpacity: number;
   endOpacity: number;
-}
-
-export interface EmitterObjectParameter {
-  mesh: Object3D;
-}
-
-export interface ParticleObjectParameter {
-  texture: Texture;
-  blending: Blending;
-  depthComparison: boolean;
-}
-
-export interface ParticleSystemParameter
-  extends Omit<EmitterParameter, 'emitterObject'>,
-    ParticleObjectParameter {
-  trail: boolean;
 }

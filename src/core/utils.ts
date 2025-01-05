@@ -7,22 +7,28 @@ import {
   NumberKeyframeTrack,
   Object3D,
   Raycaster,
-  Vector3
+  Vector3,
 } from 'three';
 
 export const getRandomValue = (base: number, spread: number): number => {
   return base + spread * MathUtils.randFloat(-1, 1);
 };
 
+export const getRandomInt = (min: number, max: number): number => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 export const getRandomVector3 = (base: Vector3, spread: Vector3): Vector3 => {
   const randomVector3 = new Vector3(
     Math.random() - 0.5,
     Math.random() - 0.5,
-    Math.random() - 0.5
+    Math.random() - 0.5,
   );
   return new Vector3().addVectors(
     base,
-    new Vector3().multiplyVectors(spread, randomVector3)
+    new Vector3().multiplyVectors(spread, randomVector3),
   );
 };
 
@@ -51,31 +57,31 @@ export const createAnimationClip = (animationDuration: number, fps: number) => {
     animationDuration === 0
       ? [0]
       : Array.from({ length: animationDuration * fps }, (_, i) =>
-          parseFloat(String(i / fps))
+          parseFloat(String(i / fps)),
         );
 
   const particleTimeKF = new NumberKeyframeTrack(
     `PARTICLE_OBJECT.material[uniforms].time[value]`,
     timeArray,
     timeArray,
-    InterpolateSmooth
+    InterpolateSmooth,
   );
   const particleVisibleKF = new BooleanKeyframeTrack(
     'PARTICLE_OBJECT.material.visible',
     [0],
-    [1]
+    [1],
   );
 
   const emitterVisibleKF = new BooleanKeyframeTrack(
     '.material.visible',
     [0],
-    [0]
+    [0],
   );
 
   const clip = new AnimationClip('effect', animationDuration, [
     particleTimeKF,
     particleVisibleKF,
-    emitterVisibleKF
+    emitterVisibleKF,
   ]);
 
   return clip;
@@ -103,51 +109,3 @@ export const isPointInsideMesh = (point: Vector3, mesh: Object3D) => {
   });
   return intersects.length % 2 !== 0;
 };
-
-// 추후 고도화 시 사용
-// const createSpriteSheetAnimation = (
-//   timeArray: number[],
-//   horizontalTileNum: number,
-//   verticalTileNum: number
-// ) => {
-//   const offsetXArray = [];
-//   const offsetYArray = [];
-//   const offsetTimeArray = [...timeArray].slice(
-//     0,
-//     horizontalTileNum * verticalTileNum
-//   );
-
-//   let current = 0;
-//   while (timeArray.length && offsetXArray.length < offsetTimeArray.length) {
-//     const offsetX = (current % horizontalTileNum) / horizontalTileNum;
-//     const offsetY =
-//       (verticalTileNum -
-//         (Math.floor(current / horizontalTileNum) % verticalTileNum) -
-//         1) /
-//       verticalTileNum;
-
-//     offsetXArray.push(offsetX);
-//     offsetYArray.push(offsetY);
-
-//     current++;
-//   }
-
-//   const particleMapOffsetxKF = new NumberKeyframeTrack(
-//     `particleSystem.material[map].offset[x]`,
-//     offsetTimeArray,
-//     offsetXArray,
-//     InterpolateDiscrete
-//   );
-
-//   const particleMapOffsetyKF = new NumberKeyframeTrack(
-//     `particleSystem.material[map].offset[y]`,
-//     offsetTimeArray,
-//     offsetYArray,
-//     InterpolateDiscrete
-//   );
-
-//   return {
-//     particleMapOffsetxKF,
-//     particleMapOffsetyKF
-//   };
-// };

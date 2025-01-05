@@ -8,7 +8,6 @@ ${ShaderChunk.clipping_planes_pars_vertex}
 uniform float time;
 attribute float life;
 attribute float startTime;
-attribute float offsetTime;
 attribute vec3 velocity;
 attribute vec3 acceleration;
 attribute float angle;
@@ -29,7 +28,7 @@ float parabola( float x, float k ){
 }
 
 void main() {
-    float age = (time - startTime - offsetTime);    // shader 가동 후 경과 시간
+    float age = (time - startTime);    // shader 가동 후 경과 시간
     float curAge = mod(age, life);                  // 생명주기 내에서 현재 나이 (생명주기를 넘어갈 경우 초기화를 위해 나머지 mod 사용)
     float percentLife = curAge / life;              // 생명주기 대비 현재 나이 (0~1)
     float opacity = mix(startOpacity, endOpacity, percentLife);
