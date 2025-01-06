@@ -117,7 +117,6 @@ export default class ParticleObject {
       alphaToCoverage: this.depthComparison,
       fog: true,
     });
-    this.material.visible = false;
   }
 
   // sprite sheet 이미지를 사용하는 경우

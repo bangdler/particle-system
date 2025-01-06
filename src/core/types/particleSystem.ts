@@ -22,7 +22,6 @@ export interface ParticleParameter {
 }
 
 export interface EmitterParameter {
-  age: number;
   particleCount: number;
   particleLife: number;
   emitterLife: number;
@@ -40,7 +39,6 @@ export interface ParticleObjectParameter {
 
 export interface InitializerParameter {
   initialBox: Object3D;
-
   velocityBase: Vector3;
   velocitySpread: Vector3;
   accelerationBase: Vector3;
@@ -50,8 +48,6 @@ export interface InitializerParameter {
   angleVelocitySpread: number;
   centerVelocityBase: number;
   centerVelocitySpread: number;
-  angleAccelerationBase: number;
-  angleAccelerationSpread: number;
   sizes: Sizes;
   startColors: Color[];
   endColors: Color[];

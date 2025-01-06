@@ -131,8 +131,7 @@ export class Emitter {
       ).uniforms.time.value += dt;
 
       this.age += dt;
-
-      this.animationId = requestAnimationFrame(this.run);
+      this.animationId = requestAnimationFrame(this.run.bind(this));
     }
   }
 
