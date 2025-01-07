@@ -30,23 +30,22 @@ const INITIAL_PARAMETERS: Model = {
   depthComparison: false,
 };
 
-// const fountain: Model = {
-//   name: 'fountain',
-//   parameters: {
-//     texture: 'star1',
-//     flowMode: true,
-//     particlesPerSecond: 100,
-//     particleLife: 3,
-//     emitterLife: 10,
-//     velocityBase: [0, 6, 0],
-//     velocitySpread: [4, 1, 4],
-//     accelerationBase: [0, -2, 0],
-//     angleVelocitySpread: 360,
-//     sizes: [0.5, 0.7, 1],
-//     startColors: ['#eb2a2a'],
-//     endColors: ['#e8c6c6'],
-//   },
-// };
+export const fountain: Model = {
+  ...INITIAL_PARAMETERS,
+  texture: 'star',
+  boxSize: [0.1, 0.1, 0.1],
+  flowMode: true,
+  particleCount: 100,
+  particleLife: 3,
+  emitterLife: 10,
+  velocityBase: [0, 6, 0],
+  velocitySpread: [4, 1, 4],
+  accelerationBase: [0, -2, 0],
+  angleVelocitySpread: 360,
+  sizes: [0.5, 0.7, 1],
+  startColors: ['#eb2a2a'],
+  endColors: ['#e8c6c6'],
+};
 
 export const fire: Model = {
   ...INITIAL_PARAMETERS,
@@ -64,70 +63,71 @@ export const fire: Model = {
   endColors: ['#ff8080'],
 };
 
-// const smoke: Model = {
-//   name: 'smoke',
-//   parameters: {
-//     texture: 'smoke2',
-//     flowMode: true,
-//     particlesPerSecond: 100,
-//     particleLife: 2,
-//     emitterLife: 10,
-//     velocityBase: [0, 1, 0],
-//     velocitySpread: [0.3, 0, 0.3],
-//     accelerationBase: [-0.1, -0.1, -0.1],
-//     angleVelocitySpread: 360,
-//     sizes: [1, 1, 2],
-//     startColors: ['#333333'],
-//     endColors: ['#808080'],
-//   },
-//   emitterInfo: {
-//     type: 'CUBE',
-//     geometryParameter: [0.3, 0.3, 0.3],
-//   },
-// };
+export const smoke: Model = {
+  ...INITIAL_PARAMETERS,
+  texture: 'smoke',
+  boxSize: [0.3, 0.3, 0.3],
+  flowMode: true,
+  particleCount: 100,
+  particleLife: 2,
+  velocityBase: [0, 1, 0],
+  velocitySpread: [0.3, 0, 0.3],
+  accelerationBase: [-0.1, -0.1, -0.1],
+  angleVelocitySpread: 360,
+  sizes: [1, 1, 2],
+  startColors: ['#333333'],
+  endColors: ['#808080'],
+};
 
-// const fog: Model = {
-//   name: 'fog',
-//   parameters: {
-//     texture: 'smoke2',
-//     flowMode: false,
-//     particlesPerSecond: 20,
-//     particleLife: 5,
-//     emitterLife: 5,
-//     sizes: [70, 70, 70],
-//     startColors: ['#eeeeee'],
-//     endColors: ['#eeeeee'],
-//     startOpacity: 0.5,
-//     endOpacity: 0.5,
-//     blending: AdditiveBlending,
-//   },
-//   emitterInfo: {
-//     type: 'CUBE',
-//     geometryParameter: [30, 10, 30],
-//   },
-// };
+export const fog: Model = {
+  ...INITIAL_PARAMETERS,
+  texture: 'fog',
+  boxSize: [30, 10, 30],
+  flowMode: false,
+  particleCount: 20,
+  particleLife: 5,
+  emitterLife: 5,
+  sizes: [70, 70, 70],
+  startColors: ['#eeeeee'],
+  endColors: ['#eeeeee'],
+  startOpacity: 0.5,
+  endOpacity: 0.5,
+  blending: AdditiveBlending,
+};
 
-// const snow: Model = {
-//   name: 'snow',
-//   parameters: {
-//     texture: 'snowflake1',
-//     flowMode: true,
-//     particlesPerSecond: 100,
-//     particleLife: 2,
-//     emitterLife: 10,
-//     velocityBase: [0, -1, 0],
-//     velocitySpread: [2, 0.5, 2],
-//     accelerationBase: [0, -0.5, 0],
-//     angleVelocitySpread: 180,
-//     sizes: [0.3, 0.3, 0.3],
-//     startColors: ['#ebe9e9'],
-//     endColors: ['#ebe9e9'],
-//   },
-//   emitterInfo: {
-//     type: 'CUBE',
-//     geometryParameter: [5, 0.5, 5],
-//   },
-// };
+export const snow: Model = {
+  ...INITIAL_PARAMETERS,
+  texture: 'snowflake',
+  boxSize: [5, 0.5, 5],
+  flowMode: true,
+  particleCount: 100,
+  particleLife: 2,
+  velocityBase: [0, -1, 0],
+  velocitySpread: [2, 0.5, 2],
+  accelerationBase: [0, -0.5, 0],
+  angleVelocitySpread: 180,
+  sizes: [0.3, 0.3, 0.3],
+  startColors: ['#ebe9e9'],
+  endColors: ['#ebe9e9'],
+};
+
+export const firework: Model = {
+  ...INITIAL_PARAMETERS,
+  texture: 'spark',
+  boxSize: [0.5, 16, 16],
+  particleCount: 100,
+  flowMode: false,
+  particleLife: 2,
+  emitterLife: 10,
+  centerVelocityBase: 1,
+  centerVelocitySpread: 0.2,
+  angleVelocitySpread: 60,
+  sizes: [0.1, 1, 0.5],
+  startColors: ['#0700cc'],
+  endColors: ['#cc0000'],
+  blending: AdditiveBlending,
+  trail: true,
+};
 
 // const fireBall: Model = {
 //   name: 'fireBall',
@@ -146,29 +146,6 @@ export const fire: Model = {
 //     startOpacity: 0.6,
 //     endOpacity: 0.6,
 //     blending: AdditiveBlending,
-//   },
-//   emitterInfo: {
-//     type: 'SPHERE',
-//     geometryParameter: [0.5, 16, 16],
-//   },
-// };
-
-// const firework: Model = {
-//   name: 'firework',
-//   parameters: {
-//     texture: 'spark1',
-//     flowMode: false,
-//     particlesPerSecond: 100,
-//     particleLife: 2,
-//     emitterLife: 10,
-//     centerVelocityBase: 1,
-//     centerVelocitySpread: 0.2,
-//     angleVelocitySpread: 60,
-//     sizes: [0.1, 1, 0.5],
-//     startColors: ['#0700cc'],
-//     endColors: ['#cc0000'],
-//     blending: AdditiveBlending,
-//     trail: true,
 //   },
 //   emitterInfo: {
 //     type: 'SPHERE',

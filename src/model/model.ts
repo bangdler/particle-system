@@ -8,9 +8,9 @@ import {
   Vector3,
 } from 'three';
 import { ColorHex, Model, VectorBase } from './type';
-import { Initializer } from './core/Initializer';
-import ParticleObject from './core/ParticleObject';
-import { Emitter } from './core/Emitter';
+import { Initializer } from '../core/Initializer';
+import ParticleObject from '../core/ParticleObject';
+import { Emitter } from '../core/Emitter';
 
 export const createParticleEmitter = (model: Model) => {
   const velocityBase = transformVectorBaseToVector3(model.velocityBase);
