@@ -8,6 +8,7 @@ export interface Model {
   emitterLife: number;
   flowMode: boolean;
   trail: boolean;
+  repeat: boolean;
 
   boxSize: VectorBase;
   velocityBase: VectorBase;

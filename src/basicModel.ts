@@ -7,6 +7,7 @@ const INITIAL_PARAMETERS: Model = {
   emitterLife: 10,
   flowMode: true,
   trail: false,
+  repeat: true,
 
   boxSize: [0.3, 0.3, 0.3],
   centerVelocityBase: 0,
@@ -50,12 +51,15 @@ const INITIAL_PARAMETERS: Model = {
 export const fire: Model = {
   ...INITIAL_PARAMETERS,
   texture: 'fire',
+  boxSize: [0.1, 0.1, 0.1],
   particleCount: 200,
-  velocityBase: [0, 2.5, 0],
+  particleLife: 2,
+  repeat: false,
+  velocityBase: [0, 1.2, 0],
   velocitySpread: [0.1, 0, 0.1],
-  accelerationBase: [0, -0.3, 0],
+  accelerationBase: [0, -0.1, 0],
   angleVelocitySpread: 360,
-  sizes: [1.5, 2.5, 1],
+  sizes: [1, 2, 0.5],
   startColors: ['#ffff80'],
   endColors: ['#ff8080'],
 };

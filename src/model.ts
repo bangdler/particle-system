@@ -58,6 +58,7 @@ export const createParticleEmitter = (model: Model) => {
     emitterLife: model.emitterLife,
     flowMode: model.flowMode,
     trail: model.trail,
+    repeat: model.repeat,
     particleObject: particleObj,
     initializer,
   });

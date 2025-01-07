@@ -22,6 +22,7 @@ export class Emitter {
   private particleLife: number;
   private flowMode: boolean;
   private trail: boolean;
+  private repeat: boolean;
   private initializer: Initializer;
   private clock: Clock = new Clock();
   private animationId: number | null = null;
@@ -32,6 +33,7 @@ export class Emitter {
     emitterLife,
     flowMode,
     trail,
+    repeat,
     initializer,
     particleObject,
   }: EmitterParameter) {
@@ -40,6 +42,7 @@ export class Emitter {
     this.emitterLife = emitterLife;
     this.flowMode = flowMode;
     this.trail = trail;
+    this.repeat = repeat;
     this.initializer = initializer;
     this.particleObject = particleObject;
   }
@@ -131,6 +134,9 @@ export class Emitter {
       ).uniforms.time.value += dt;
 
       this.age += dt;
+      if (this.age > this.emitterLife && this.repeat) {
+        this.age = 0;
+      }
       this.animationId = requestAnimationFrame(this.run.bind(this));
     }
   }

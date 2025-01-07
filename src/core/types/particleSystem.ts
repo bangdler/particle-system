@@ -27,6 +27,7 @@ export interface EmitterParameter {
   emitterLife: number;
   flowMode: boolean;
   trail: boolean;
+  repeat: boolean;
   initializer: Initializer;
   particleObject: ParticleObject;
 }
