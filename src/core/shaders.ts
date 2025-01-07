@@ -32,7 +32,7 @@ void main() {
     float curAge = mod(age, life);                  // 생명주기 내에서 현재 나이 (생명주기를 넘어갈 경우 초기화를 위해 나머지 mod 사용)
     float percentLife = curAge / life;              // 생명주기 대비 현재 나이 (0~1)
     float opacity = mix(startOpacity, endOpacity, percentLife);
-    float isVisible = step(0.0, age);
+    float isVisible = max(sign(age), 0.0);
     float afterMid = step(0.5, percentLife);
     const float scale = 300.0;
 
