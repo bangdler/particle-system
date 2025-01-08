@@ -5,27 +5,40 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 export const scene = new THREE.Scene();
 
 export const initScene = () => {
+  const container = document.querySelector<HTMLDivElement>('#scene')!;
+
   const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     0.1,
     1000,
   );
-  camera.position.z = 5;
-  const renderer = new THREE.WebGLRenderer();
+  camera.position.set(0, 2, 5);
+
+  // 렌더러 설정
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
   const canvas = renderer.domElement;
-  const controls = new OrbitControls(camera, canvas);
-  const container = document.querySelector<HTMLDivElement>('#scene')!;
-
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(container.clientWidth, container.clientHeight);
-  container.appendChild(canvas);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  // 조명 설정
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-  directionalLight.position.set(10, 10, 10);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 10, 7.5);
+  //   directionalLight.castShadow = true;
   scene.add(directionalLight);
+
+  // 그리드 헬퍼 추가 (선택사항)
+  const gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x888888);
+  scene.add(gridHelper);
+
+  const controls = new OrbitControls(camera, canvas);
+
+  container.appendChild(canvas);
 
   const animate = () => {
     renderer.render(scene, camera);
