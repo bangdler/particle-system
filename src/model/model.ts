@@ -11,6 +11,14 @@ import { ColorHex, Model, VectorBase } from './type';
 import { Initializer } from '../core/Initializer';
 import ParticleObject from '../core/ParticleObject';
 import { Emitter } from '../core/Emitter';
+import {
+  circleUrl,
+  fireUrl,
+  glowUrl,
+  smokeUrl,
+  snowUrl,
+  startUrl,
+} from './images';
 
 export const createParticleEmitter = (model: Model) => {
   const velocityBase = transformVectorBaseToVector3(model.velocityBase);
@@ -75,7 +83,16 @@ const transformHexColorsToColors = (colors: ColorHex[]): Color[] => {
 };
 
 const textureLoader = new TextureLoader();
+const urls: Record<string, string> = {
+  fire: fireUrl,
+  circle: circleUrl,
+  glow: glowUrl,
+  smoke: smokeUrl,
+  snow: snowUrl,
+  star: startUrl,
+};
+
 const transformTextureNameToTexture = (textureName: string): Texture => {
-  const path = `/${textureName}.png`;
+  const path = urls[textureName];
   return textureLoader.load(path);
 };
