@@ -2,7 +2,7 @@ import { Clock, ShaderMaterial } from 'three';
 import { Initializer } from './Initializer';
 import Particle from './Particle';
 import ParticleObject from './ParticleObject';
-import { EmitterParameter } from './types/particleSystem';
+import { EmitterParameter, Sizes } from './types/particleSystem';
 
 // TODO: 상수 분리
 const trailConfig = {
@@ -75,11 +75,14 @@ export class Emitter {
   }
 
   private createTrailParticle(startTime: number): Particle[] {
+    const params = this.initializer.getInitialParams();
+
     const trailParticles = Array.from(
       { length: trailConfig.number },
       (_, idx) => {
-        const params = this.initializer.getInitialParams();
-        params.sizes.map(size => size * trailConfig.sizeReduction ** idx);
+        params.sizes = params.sizes.map(
+          size => size * trailConfig.sizeReduction ** idx,
+        ) as Sizes;
         params.startOpacity *= trailConfig.opacityReduction ** idx;
         params.endOpacity *= trailConfig.opacityReduction ** idx;
 
